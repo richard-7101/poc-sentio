@@ -401,16 +401,16 @@ Trade(uint256 indexed pTokenId, bytes32 indexed symbolId, int256 indexPrice, int
     symbolManager = event.address
     pool = symbolManager.pool()
 
-    # symbols this trader has position with
+    // symbols this trader has position with
     symbols = symbolManager.getActiveSymbols(pTokenId)
-    # the current traded symbol maybe removed from active symbols if position is closed with this trade
-    # so we include the current symbol anyway
+    // the current traded symbol maybe removed from active symbols if position is closed with this trade
+    // so we include the current symbol anyway
     symbols = set(symbols + [symbolManager.symbols(symbolId)])
 
     for symbol in symbols:
         symbolName = symbol.symbol()
         if not symbolName.endswith('-Gamma'):
-                # Futures, Option, Power
+                // Futures, Option, Power
                 emit SymbolState {
                     pool: pool
                     symbol: symbolName
@@ -440,7 +440,7 @@ Trade(uint256 indexed pTokenId, bytes32 indexed symbolId, int256 indexPrice, int
                 }
 
             else:
-                # Gamma
+                // Gamma
                 emit SymbolState {
                     pool: pool
                     symbol: symbolName
