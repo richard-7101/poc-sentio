@@ -7,7 +7,7 @@ NewImplementation(address newImplementation)
 1. Pool info
     ```js
     emit PoolInfo {
-        poolAddress: event.address
+        pool: event.address
         vaultTemplate: pool.vaultTemplate()
         vaultImplementation: pool.vaultImplementation()
         tokenB0: pool.tokenB0()
@@ -85,8 +85,8 @@ NewImplementation(address newImplementation)
     symbolName = symbol.symbol()
     if symbolName.endswith('-C') or symbolName.endswith('-P'): // Option
         emit SymbolInfo {
-            symbolAddress: symbol
-            symbol: symbolName
+            symbol: symbol
+            symbolName: symbolName
             symbolManager: symbol.manager()
             pool: symbolManager.pool()
             oracleManager: symbol.oracleManager()
@@ -111,8 +111,8 @@ NewImplementation(address newImplementation)
         }
     elif '^2' in symbolName: // Power
         emit SymbolInfo {
-            symbolAddress: symbol
-            symbol: symbolName
+            symbol: symbol
+            symbolName: symbolName
             symbolManager: symbol.manager()
             pool: symbolManager.pool()
             oracleManager: symbol.oracleManager()
@@ -134,8 +134,8 @@ NewImplementation(address newImplementation)
         }
     elif symbolName.endswith('-Gamma'): // Gamma
         emit SymbolInfo {
-            symbolAddress: symbol
-            symbol: symbolName
+            symbol: symbol
+            symbolName: symbolName
             symbolManager: symbol.manager()
             pool: symbolManager.pool()
             oracleManager: symbol.oracleManager()
@@ -153,8 +153,8 @@ NewImplementation(address newImplementation)
         }
     else: // Futures
         emit SymbolInfo {
-            symbolAddress: symbol
-            symbol: symbolName
+            symbol: symbol
+            symbolName: symbolName
             symbolManager: symbol.manager()
             pool: symbolManager.pool()
             oracleManager: symbol.oracleManager()
@@ -182,7 +182,7 @@ AddLiquidity(uint256 indexed lTokenId, address indexed underlying, uint256 amoun
 1. Pool state
     ```js
     emit PoolState {
-        poolAddress: event.address
+        pool: event.address
         liquidity: pool.liquidity()
         lpsPnl: pool.lpsPnl()
         cumulativePnlPerLiquidity: pool.cumulativePnlPerLiquidity()
@@ -228,7 +228,7 @@ AddLiquidity(uint256 indexed lTokenId, address indexed underlying, uint256 amoun
 
     emit SymbolManagerState {
         pool: pool
-        symbolManagerAddress: symbolManager
+        symbolManager: symbolManager
         initialMarginRequired: symbolManager.initialMarginRequired()
     }
 
@@ -242,8 +242,8 @@ AddLiquidity(uint256 indexed lTokenId, address indexed underlying, uint256 amoun
             if netVolume != 0: // only symbols with positions will be settled
                 emit SymbolState {
                     pool: pool
-                    symbol: symbolName
-                    symbolAddress: symbol.address
+                    symbol: symbol.address
+                    symbolName: symbolName
                     indexPrice: symbol.indexPrice()
                     fundingTimestamp: symbol.fundingTimestamp()
                     cumulativeFundingPerVolume: symbol.cumulativeFundingPerVolume()
@@ -256,8 +256,8 @@ AddLiquidity(uint256 indexed lTokenId, address indexed underlying, uint256 amoun
             if netPowerVolume != 0: // only symbols with positions will be settled
                 emit SymbolState {
                     pool: pool
-                    symbol: symbolName
-                    symbolAddress: symbol.address
+                    symbol: symbol.address
+                    symbolName: symbolName
                     indexPrice: symbol.indexPrice()
                     fundingTimestamp: symbol.fundingTimestamp()
                     cumulaitveFundingPerPowerVolume: symbol.cumulaitveFundingPerPowerVolume()
@@ -307,7 +307,7 @@ RemoveMargin(uint256 indexed pTokenId, address indexed underlying, uint256 amoun
 1. Pool state
     ```js
     emit PoolState {
-        poolAddress: event.address
+        pool: event.address
         lpsPnl: pool.lpsPnl()
         cumulativePnlPerLiquidity: pool.cumulativePnlPerLiquidity()
     }
@@ -346,8 +346,8 @@ RemoveMargin(uint256 indexed pTokenId, address indexed underlying, uint256 amoun
             // Futures, Option, Power
             emit SymbolState {
                 pool: pool
-                symbol: symbolName
-                address: symbol.address
+                symbol: symbol.address
+                symbolName: symbolName
                 indexPrice: symbol.indexPrice()
                 fundingTimestamp: symbol.fundingTimestamp()
                 cumulativeFundingPerVolume: symbol.cumulativeFundingPerVolume()
@@ -358,8 +358,8 @@ RemoveMargin(uint256 indexed pTokenId, address indexed underlying, uint256 amoun
             // Gamma
             emit SymbolState {
                 pool: pool
-                symbol: symbolName
-                address: symbol.address
+                symbol: symbol.address
+                symbolName: symbolName
                 indexPrice: symbol.indexPrice()
                 fundingTimestamp: symbol.fundingTimestamp()
                 cumulaitveFundingPerPowerVolume: symbol.cumulaitveFundingPerPowerVolume()
@@ -376,7 +376,7 @@ Trade(uint256 indexed pTokenId, bytes32 indexed symbolId, int256 indexPrice, int
 1. Pool state
     ```js
     emit PoolState {
-        poolAddress: symbolManager.pool()
+        pool: symbolManager.pool()
         lpsPnl: pool.lpsPnl()
         cumulativePnlPerLiquidity: pool.cumulativePnlPerLiquidity()
         protocolFeeAccrued: pool.protocolFeeAccrued()
@@ -413,8 +413,8 @@ Trade(uint256 indexed pTokenId, bytes32 indexed symbolId, int256 indexPrice, int
                 // Futures, Option, Power
                 emit SymbolState {
                     pool: pool
-                    symbol: symbolName
-                    symbolAddress: symbol.address
+                    symbol: symbol.address
+                    symbolName: symbolName
                     netVolume: symbol.netVolume()
                     netCost: symbol.netCost()
                     indexPrice: symbol.indexPrice()
@@ -431,8 +431,8 @@ Trade(uint256 indexed pTokenId, bytes32 indexed symbolId, int256 indexPrice, int
                 position = symbol.positions(pTokenId)
                 emit PositionState {
                     pool: pool
-                    symbol: symbolName
-                    symbolAddress: symbol.address
+                    symbol: symbol.address
+                    symbolName: symbolName
                     pTokenId: pTokenId
                     volume: position.volume
                     cost: position.cost
@@ -443,8 +443,8 @@ Trade(uint256 indexed pTokenId, bytes32 indexed symbolId, int256 indexPrice, int
                 // Gamma
                 emit SymbolState {
                     pool: pool
-                    symbol: symbolName
-                    symbolAddress: symbol.address
+                    symbol: symbol.address
+                    symbolName: symbolName
                     indexPrice: symbol.indexPrice()
                     fundingTimestamp: symbol.fundingTimestamp()
                     cumulaitveFundingPerPowerVolume: symbol.cumulaitveFundingPerPowerVolume()
@@ -460,8 +460,8 @@ Trade(uint256 indexed pTokenId, bytes32 indexed symbolId, int256 indexPrice, int
                 position = symbol.positions(pTokenId)
                 emit PositionState {
                     pool: pool
-                    symbol: symbolName
-                    symbolAddress: symbol.address
+                    symbol: symbol.address
+                    symbolName: symbolName
                     powerVolume: position.powerVolume
                     realFuturesVolume: position.realFuturesVolume
                     cost: position.cost
