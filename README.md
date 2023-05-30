@@ -469,3 +469,9 @@ Trade(uint256 indexed pTokenId, bytes32 indexed symbolId, int256 indexPrice, int
                     cumulativeFundingPerRealFuturesVolume: position.cumulativeFundingPerRealFuturesVolume
                 }
     ```
+
+### DToken.Transfer
+```js
+LToken.Transfer(address indexed from, address indexed to, uint256 indexed tokenId)
+PToken.Transfer(address indexed from, address indexed to, uint256 indexed tokenId)
+```
